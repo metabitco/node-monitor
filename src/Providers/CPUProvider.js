@@ -1,10 +1,12 @@
-const ps = require('current-processes')
-const os = require('os');
+const si = require('systeminformation')
 
- module.exports = {
+module.exports = {
     register() {
+
+    },
+    boot() {
         return new Promise((resolve, reject) => {
-            resolve(os.cpus());
+            si.cpu().then(resolve).catch(reject);
         })
     }
 }

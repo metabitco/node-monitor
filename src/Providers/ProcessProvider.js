@@ -1,10 +1,11 @@
-const ps = require('current-processes')
-const os = require('os')
-
- module.exports = {
+const si = require('systeminformation')
+module.exports = {
     register() {
+
+    },
+    boot() {
         return new Promise((resolve, reject) => {
-            resolve(os.networkInterfaces());
+            si.processes().then(resolve).catch(reject)
         })
     }
 }

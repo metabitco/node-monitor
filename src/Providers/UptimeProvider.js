@@ -1,9 +1,18 @@
-const os = require('os');
+const si = require('systeminformation');
 
- module.exports = {
+const uptime = function () {
+    return new Promise((resolve, reject) => {
+        resolve(si.time());
+    });
+}
+
+module.exports = {
     register() {
+
+    },
+    boot() {
         return new Promise((resolve, reject) => {
-            resolve(os.uptime());
+            uptime().then(resolve).catch(reject);
         })
     }
 }

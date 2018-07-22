@@ -1,17 +1,21 @@
-const pretty = require('prettysize');
-const df = require('node-df');
-
-pretty(123456789, false, true, 3)
+const si = require('systeminformation')
 
 module.exports = {
     register() {
-        return new Promise((resolve, reject) => {
-            df(function (error, response) {
-                if (error) { reject(error); }
-             
-                resolve(response);
-            });
 
+    },
+    boot() {
+        return new Promise((resolve, reject) => {
+            si.fsSize().then(dataBits => {
+                dataBits = dataBits.map(disk => {
+                    disk.human_size = disk.size / 1000000000;
+                    disk.human_used = disk.used / 1000000000;
+                    return disk;
+                })
+
+                resolve(dataBits);
+            })
+                .catch(reject);
         })
     }
 }

@@ -1,9 +1,12 @@
-const os = require('os');
+const si = require('systeminformation')
 
- module.exports = {
+module.exports = {
     register() {
+
+    },
+    boot() {
         return new Promise((resolve, reject) => {
-            resolve(os.userInfo());
+            si.users(resolve).catch(reject)
         })
     }
 }

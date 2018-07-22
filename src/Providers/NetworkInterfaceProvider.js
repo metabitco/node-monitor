@@ -1,9 +1,11 @@
-const os = require('os');
+const si = require('systeminformation');
 
  module.exports = {
     register() {
+    },
+    boot() {
         return new Promise((resolve, reject) => {
-            resolve(os.cpus());
+            si.networkInterfaces().then(resolve).catch(reject);
         })
     }
 }
