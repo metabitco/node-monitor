@@ -15,7 +15,7 @@ module.exports = {
 
                 resolve(dataBits);
             })
-                .catch(reject);
+            .catch(reject);
         })
     }
 }

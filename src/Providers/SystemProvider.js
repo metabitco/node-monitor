@@ -6,7 +6,7 @@ module.exports = {
     },
     boot() {
         return new Promise((resolve, reject) => {
-            si.currentLoad().then(resolve).catch(reject);
+            si.system().then(resolve).catch(reject)
         })
     }
 }

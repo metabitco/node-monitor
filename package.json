@@ -5,21 +5,21 @@
   "description": "A monitoring system",
   "main": "index.js",
   "bin": {
-    "moniotr": "./bin/kbco-player.js"
+    "monitor-dash": "./bin/web.js",
+    "monitor-server": "./bin/server.js"
   },
   "dependencies": {
     "@kbco/provider": "^0.1.1",
     "@kbco/router": "^0.0.7",
-    "current-processes": "^0.2.1",
+    "axios": "^0.18.0",
+    "cross-env": "^5.2.0",
     "dotenv": "^5.0.0",
-    "install": "^0.10.4",
-    "mongoose": "^5.0.10",
-    "node-df": "^0.1.4",
-    "npm": "^5.7.1",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "prettysize": "^1.1.0",
-    "promise": "^8.0.1"
+    "edge.js": "^1.1.4",
+    "laravel-mix": "^2.1.11",
+    "socket.io": "^2.1.1",
+    "systeminformation": "^3.41.3",
+    "vue": "^2.5.16",
+    "vue-good-table": "^2.11.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -28,7 +28,11 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -R spec tests/*spec.js"
+    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "preinstall": "sh ./bin/install.sh"
   },
   "author": "austinkregel",
   "license": "MIT"

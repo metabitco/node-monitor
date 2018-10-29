@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/0.6.0/tailwind.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vue-good-table@2.11.0/dist/vue-good-table.min.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/taucharts@1/build/production/tauCharts.min.css'>
+    </head>
+<body>
+<div class="container mx-auto py-4" id="thing">
+    <h2 class="mx-2 mt-4 mb-2">Quick stats</h2>
+    <div class="flex">
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ memory.used }} GB
+                        </div>
+                        RAM Usage
+                    </div>
+                    <div class="w-2/5 text-right text-blue">
+                        <svg class="w-12 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 10h3v10H1V10zM6 0h3v20H6V0zm5 8h3v12h-3V8zm5-4h3v16h-3V4z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ processes.running }}
+                        </div>
+                        Active Process
+                    </div>
+                    <div class="w-2/5 text-right text-green">
+                        <svg class="w-12 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 10h3v10H1V10zM6 0h3v20H6V0zm5 8h3v12h-3V8zm5-4h3v16h-3V4z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ cpus.currentload }}%
+                        </div>
+                        CPU Usage
+                    </div>
+                    <div class="w-2/5 text-right text-red">
+                        <svg class="w-12 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 10h3v10H1V10zM6 0h3v20H6V0zm5 8h3v12h-3V8zm5-4h3v16h-3V4z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ free_space }}GB
+                        </div>
+                        Free Space
+                    </div>
+                    <div class="w-2/5 text-right text-blue">
+                        <svg class="w-12 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 10h3v10H1V10zM6 0h3v20H6V0zm5 8h3v12h-3V8zm5-4h3v16h-3V4z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- This is a new thing -->
+    <div class="flex">
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ battery.percent }}%
+                        </div>
+                        Battery Usage
+                    </div>
+                    <div class="w-2/5 text-right">
+                        <svg v-if="battery.percent > 60" class="w-12 fill-current text-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 6c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm2 0v8h16V6H2zm1 1h4v6H3V7zm5 0h4v6H8V7zm5 0h4v6h-4V7z"/></svg>
+                        <svg v-else-if="battery.percent > 30" class="w-12 fill-current  text-yellow-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 6c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm2 0v8h16V6H2zm1 1h4v6H3V7zm5 0h4v6H8V7z"/></svg>
+                        <svg v-else-if="battery.percent > 0" class="w-12 fill-current text-red-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 6c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6zm2 0v8h16V6H2zm1 1h4v6H3V7z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ os.release }}
+                        </div>
+                        MacOS version
+                    </div>
+                    <div class="w-2/5 text-right text-green">
+                        <svg class="w-12 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 10h3v10H1V10zM6 0h3v20H6V0zm5 8h3v12h-3V8zm5-4h3v16h-3V4z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ hostname.hostname }}
+                        </div>
+                        Hostname
+                    </div>
+                    <div class="w-2/5 text-right text-red">
+                        <svg class="w-12 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 10h3v10H1V10zM6 0h3v20H6V0zm5 8h3v12h-3V8zm5-4h3v16h-3V4z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="w-1/4">
+            <div class="m-2 px-6 py-4 rounded overflow-hidden shadow-lg">
+                <div class="flex">
+                    <div class="w-3/5">
+                        <div class="font-bold text-xl mb-2 align-middle">
+                            @{{ displayCount }}
+                        </div>
+                        # Of displays
+                    </div>
+                    <div class="w-2/5 text-right text-blue">
+                        <svg class="w-12 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 10h3v10H1V10zM6 0h3v20H6V0zm5 8h3v12h-3V8zm5-4h3v16h-3V4z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="bg-grey h-px mt-6 block mx-2"/>
+    <div>
+        <h2 class="mx-2 mt-4 mb-2">Processes</h2>
+        <vue-good-table
+                :columns="process_table.columns"
+                :rows="process_table.rows"
+                Class="shadow-lg m-2 my-4 rounded"
+                :pagination-options="{
+            enabled: true,
+            perPage: 10,
+            position: 'bottom',
+            perPageDropdown: [10, 20, 50, 100],
+            dropdownAllowAll: true
+          }"/>
+    </div>
+    <hr class="bg-grey h-px mt-6 block mx-2"/>
+    <div>
+        <h2 class="mx-2 mt-4 mb-2">Networks</h2>
+        <vue-good-table
+                :columns="network_table.columns"
+                :rows="network_table.rows"
+                Class="shadow-lg m-2 rounded"
+                :search-options="{
+            enabled: true
+          }"/>
+        <div id="target" class="c"></div>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js'></script>
+
+<script src="/js/app.js"></script>
+
+</body>
+</html>

@@ -5,56 +5,67 @@ Providers.register({
     'cpus': require('./src/Providers/CPUProvider'),
     'disk': require('./src/Providers/DiskProvider'),
     'hostname': require('./src/Providers/HostnameProvider'),
-    'http': require('./src/Providers/HttpProvider'),
+    // 'http': require('./src/Providers/HttpProvider'),
     'interfaces': require('./src/Providers/NetworkInterfaceProvider'),
     'platform': require('./src/Providers/PlatformProvider'),
     'processes': require('./src/Providers/ProcessProvider'),
     'uptime': require('./src/Providers/UptimeProvider'),
     'user': require('./src/Providers/UserProvider'),
+    'system': require('./src/Providers/SystemProvider'),
+    'bios': require('./src/Providers/BiosProvider'),
+    'baseboard': require('./src/Providers/BasebordProvider'),
+    'battery': require('./src/Providers/BatteryProvider'),
+    'graphics': require('./src/Providers/GraphicsProvider'),
+    'memory': require('./src/Providers/MemoryProvider'),
+    'os': require('./src/Providers/OsProvider'),
+    'temp': require('./src/Providers/TemperatureProvider'),
 });
 
+module.exports = {
+    getData: (callback) => {
+        Promise.all(Object.values(Providers.available).map(available => available.boot()))
+            .then((data) => {
+                [
+                    cpus,
+                    disk,
+                    hostname,
+                    interfaces,
+                    platform,
+                    processes,
+                    uptime,
+                    user,
+                    system,
+                    bios,
+                    baseboard,
+                    battery,
+                    graphics,
+                    memory,
+                    os,
+                    temp,
+                ] = data;
 
-var  [cpus,disk,hostname,interfaces,platform,processes,uptime,user] = [0,0,0,0,0,0,0,0,];
-// io.on('connection', (socket) => {
-    // var interval = setInterval(() => {
-        Promise.all([
-            Providers.loaded.cpus,
-            Providers.loaded.disk,
-            Providers.loaded.hostname,
-            Providers.loaded.http,
-            Providers.loaded.interfaces,
-            Providers.loaded.platform,
-            Providers.loaded.processes,
-            Providers.loaded.uptime,
-            Providers.loaded.user,
-        ]).then((data) => {
-            [
-                cpus,
-                disk,
-                hostname,
-                http,
-                interfaces,
-                platform,
-                processes,
-                uptime,
-                user,
-            ] = data;
-            
-            console.log({
-                cpus,
-                disk,
-                hostname,
-                http,
-                interfaces,
-                platform,
-                processes,
-                uptime,
-                user,
+                callback({
+                    cpus,
+                    disk,
+                    hostname,
+                    interfaces,
+                    platform,
+                    processes,
+                    uptime,
+                    user,
+                    system,
+                    bios,
+                    baseboard,
+                    battery,
+                    graphics,
+                    memory,
+                    os,
+                    temp,
+                })
             })
-        })
-    // }, 1000);
-
-//     socket.on('disconnect', () => {
-//         clearInterval(interval);
-//     })
-// })
+            .catch((e) => {
+                console.log('some shit failed')
+            })
+    },
+    Providers
+}
