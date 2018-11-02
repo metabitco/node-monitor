@@ -12,3 +12,8 @@ If you really want to give this a go, clone the repo `git clone git@github.com:a
 `node index.js`
 
 
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/metabitco/node-monitor/badge.svg?style=beer-square)](https://beerpay.io/metabitco/node-monitor)  [![Beerpay](https://beerpay.io/metabitco/node-monitor/make-wish.svg?style=flat-square)](https://beerpay.io/metabitco/node-monitor?focus=wish)
