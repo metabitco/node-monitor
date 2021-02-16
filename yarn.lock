@@ -5238,7 +5238,7 @@ once@^1.3.0, once@^1.3.1, once@^1.4.0:
 
 onetime@^1.0.0:
   version "1.1.0"
-  resolved "http://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
+  resolved "https://registry.npmjs.org/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
 
 opn@^5.1.0:
   version "5.3.0"
@@ -7064,9 +7064,9 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-systeminformation@^3.41.3:
-  version "3.41.3"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-3.41.3.tgz#b5c53d7e1ae116968dcf000b23335c58d2694a93"
+systeminformation@^5.3.1:
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.3.1.tgz#72755645a982fbb9367736518ac4e5d91f5a49e1"
 
 tapable@^0.2.7:
   version "0.2.8"
