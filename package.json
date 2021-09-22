@@ -14,7 +14,7 @@
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
     "dotenv": "^5.0.0",
-    "edge.js": "^1.1.4",
+    "edge.js": "^5.3.2",
     "laravel-mix": "^2.1.11",
     "socket.io": "^2.1.1",
     "systeminformation": "^3.41.3",
