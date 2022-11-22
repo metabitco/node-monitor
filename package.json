@@ -16,7 +16,7 @@
     "dotenv": "^5.0.0",
     "edge.js": "^1.1.4",
     "laravel-mix": "^2.1.11",
-    "socket.io": "^2.1.1",
+    "socket.io": "^2.5.0",
     "systeminformation": "^3.41.3",
     "vue": "^2.5.16",
     "vue-good-table": "^2.11.1"
